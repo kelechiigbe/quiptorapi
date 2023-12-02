@@ -8,6 +8,7 @@ module.exports.addProduct = async (req, res) => {
         if(!title || !sku || !price) return res.send("Fields are empty")
 
         let product = new productModel(req.body)
+        console.log(product)
         product.save()
 
         return res.json({

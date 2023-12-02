@@ -94,22 +94,25 @@ app.get("/admin/users",[isAdmin],getAllUsers)
 // HELPER
 app.post('/photos/upload', upload.array('photos', 12), function (req, res, next) {  
   // req.files is array of `photos` files
+console.log("body" + JSON.stringify(req.body));
 
   try{
-    let files = req.files;
-    if(!files.length){
+    let file = req.body.photos;
+    console.log(req.body.photos);
+    console.log(file)
+    if(!file){
       return res.status(400).json({ err:'Please upload an image', msg:'Please upload an image' })
     }
-    let file = req.files[0]
-    if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
-        return res.json({"image" : file.filename}) 
-    }
+    return res.json({"image" : file}) 
+    // if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+    //     return res.json({"image" : file}) 
+    // }
   }
   catch(error){
     return res.send(error.message)
   }
 })
 
-app.listen((process.env.PORT || 8081), () => {
+app.listen((process.env.PORT || 80), () => {
   console.log(`Example app listening on port ${process.env.PORT}!`)
 });
