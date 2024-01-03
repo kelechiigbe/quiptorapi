@@ -6,6 +6,9 @@ const productSchema = mongoose.Schema({
     sku : {type : String},
     price : Number,
     image : String,
+    lat: Number,
+    long: Number,
+    address: String,
     description : String,
     category : {type:mongoose.Schema.Types.ObjectId, ref:'categories'},
     quantity : Number
